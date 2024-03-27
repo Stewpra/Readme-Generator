@@ -49,26 +49,27 @@ const questions = [
     type: 'list',
     name: 'license',
     message: 'Pick your license:',
-    choices: ['MIT', 'Apache 2.0', 'GPLv3', 'BSD 3-Clause'],
+    choices: ['MIT', 'Apache 2.0', 'GPLv3'],
   },
 ];
 
 // FUNCTIONS
-inquirer.prompt(questions).then((answers) => {
-  const readmeContent = generateREADME(answers);
-  fs.writeFile('README.md', readmeContent, (err) => {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log('README.md file generated successfully!');
-    }
+function promptUser() {
+  inquirer.prompt(questions).then((answers) => {
+    const readmeContent = generateREADME(answers);
+    fs.writeFile('README.md', readmeContent, (err) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log('README.md file generated successfully!');
+      }
+    });
   });
-});
+}
 
-// TODO: Create a function to initialize app
-function init() {}
+function init() {
+  promptUser();
+}
 
 // INITILIZATIONS
-
-// Function call to initialize app
 init();
