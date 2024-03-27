@@ -1,10 +1,9 @@
 // DEPENDENCIES
 const inquirer = require('inquirer');
 const fs = require('fs');
+const generateREADME = require('./utils/generateMarkdown');
 
 // DATA
-
-// TODO: Create an array of questions for user input
 const questions = [
   {
     type: 'input',
@@ -39,7 +38,7 @@ const questions = [
   {
     type: 'input',
     name: 'gitHub',
-    message: 'Add you github username:',
+    message: 'Add your GitHub username:',
   },
   {
     type: 'input',
@@ -49,10 +48,12 @@ const questions = [
   {
     type: 'list',
     name: 'license',
-    message: 'Pick your license',
+    message: 'Pick your license:',
+    choices: ['MIT', 'Apache 2.0', 'GPLv3', 'BSD 3-Clause'],
   },
 ];
 
+// FUNCTIONS
 inquirer.prompt(questions).then((answers) => {
   const readmeContent = generateREADME(answers);
   fs.writeFile('README.md', readmeContent, (err) => {
@@ -64,17 +65,10 @@ inquirer.prompt(questions).then((answers) => {
   });
 });
 
-// FUNCTIONS
-
-// USER INTERACTIONS
-
-// INITILIZATIONS
-
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
-
 // TODO: Create a function to initialize app
 function init() {}
+
+// INITILIZATIONS
 
 // Function call to initialize app
 init();
